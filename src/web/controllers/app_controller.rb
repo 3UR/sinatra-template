@@ -28,7 +28,7 @@ class AppController < BaseController
     if cached_value.nil?
       # no data is cached, we can generate data to cache and then cache it
       data = generate_data_to_cache
-      CACHE_STORE.write('cache_demo_cached_data', data, expires_in: CACHE_EXPIRATION)
+      CACHE_STORE.write('cache_demo_cached_data', data, expires_in: Config::Caching::EXPIRATION)
     else
       # data is cached
       data = cached_value
