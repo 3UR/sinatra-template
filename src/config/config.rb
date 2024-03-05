@@ -21,6 +21,13 @@ class Config
     PASSWORD   = ENV['CACHE_PASSWORD'] || '' # no password can be used with redis
     EXPIRATION = ENV['CACHE_EXPIRATION'] || 3600
   end
+
+  #
+  # Custom Configuration Classes
+  #
+  # You can add your own configuration classes below.
+  #
+
 end
 
 # setup db
@@ -49,7 +56,7 @@ else
   require 'sqlite3'
 
   DB_DIRECTORY = File.expand_path('../database/data', __dir__)
-  DB_FILE = File.join(DB_DIRECTORY, "#{DB_NAME}.sqlite3")
+  DB_FILE = File.join(DB_DIRECTORY, "#{Config::Database::NAME}.sqlite3")
 
   ActiveRecord::Base.establish_connection(
     adapter: 'sqlite3',
