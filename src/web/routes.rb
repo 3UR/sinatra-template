@@ -17,7 +17,12 @@ module Routes
 
     # GET: /demo
     app.get '/demo' do
-      AppController.new.index
+      AppController.new.demo
+    end
+
+    # GET: /cache-demo
+    app.get '/cache-demo' do
+      AppController.new.cache_demo
     end
 
     # ERROR HANDLING; DO NOT REMOVE IF YOU DON'T KNOW WHAT YOU'RE DOING

@@ -19,4 +19,27 @@ class AppController < BaseController
     # taken from the sinatra lib documentation and changed up to work with my template
     json({ message: "I'm a teapot!" }, 418, { "Allow" => "BREW, POST, GET, PROPFIND, WHEN", "Refresh" => "Refresh: 20; https://ietf.org/rfc/rfc2324.txt" })
   end
+
+  # Action for framework user to try out the public cacing API
+  def cache_demo
+    # check if the value is cached
+    cached_value = CACHE_STORE.read('cache_demo_cached_data')
+
+    if cached_value.nil?
+      # no data is cached, we can generate data to cache and then cache it
+      data = generate_data_to_cache
+      CACHE_STORE.write('cache_demo_cached_data', data, expires_in: CACHE_EXPIRATION)
+    else
+      # data is cached
+      data = cached_value
+    end
+
+    json({ data: data })
+  end
+
+  private
+
+  def generate_data_to_cache
+    "This is cached data generated at #{Time.now.utc} UTC"
+  end
 end

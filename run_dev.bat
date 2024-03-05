@@ -1,0 +1,2 @@
+ECHO "THIS BATCH SCRIPT IS INTENDED TO RUN A DEVELOPMENT SERVER DO NOT USE THIS IN PROD"
+cd src && puma -C config/puma.rb -e development -w 0

@@ -16,6 +16,104 @@ This application template is designed for easy maintenance and seamless integrat
 
 This template was made for building micro APIs using [Sinatra](https://github.com/sinatra/sinatra). It provides a foundation that can be easily extended to add more functionality.
 
+### Public Caching API
+
+#### Memory Cache
+
+##### `read(key)`
+
+Retrieves a cached value by its key.
+
+Parameters:
+- `key` (String): The key of the cached value to retrieve.
+
+Returns:
+- The cached value associated with the provided key, or `nil` if the key is not found.
+
+##### `write(key, value, options = {})`
+
+Writes a value to the cache with the specified key.
+
+Parameters:
+- `key` (String): The key under which to store the value.
+- `value` (Object): The value to be cached.
+- `options` (Hash, optional): Additional options for caching (e.g., expiration time).
+
+Returns:
+- The cached value.
+
+##### `delete(key)`
+
+Deletes a cached value by its key.
+
+Parameters:
+- `key` (String): The key of the cached value to delete.
+
+Returns:
+- `true` if the value was successfully deleted, `false` otherwise.
+
+#### Redis Cache
+
+##### `read(key)`
+
+Retrieves a cached value by its key.
+
+Parameters:
+- `key` (String): The key of the cached value to retrieve.
+
+Returns:
+- The cached value associated with the provided key, or `nil` if the key is not found.
+
+##### `write(key, value, options = {})`
+
+Writes a value to the cache with the specified key.
+
+Parameters:
+- `key` (String): The key under which to store the value.
+- `value` (Object): The value to be cached.
+- `options` (Hash, optional): Additional options for caching (e.g., expiration time).
+
+Returns:
+- The cached value.
+
+##### `delete(key)`
+
+Deletes a cached value by its key.
+
+Parameters:
+- `key` (String): The key of the cached value to delete.
+
+Returns:
+- `true` if the value was successfully deleted, `false` otherwise.
+
+#### Usage Examples
+
+##### Memory Cache
+
+```ruby
+# Read from cache
+cached_value = CACHE_STORE.read('my_key')
+
+# Write to cache
+CACHE_STORE.write('my_key', 'my_value')
+
+# Delete from cache
+CACHE_STORE.delete('my_key')
+```
+
+##### Redis Cache
+
+```ruby
+# Read from cache
+cached_value = CACHE_STORE.read('my_key')
+
+# Write to cache
+CACHE_STORE.write('my_key', 'my_value')
+
+# Delete from cache
+CACHE_STORE.delete('my_key')
+```
+
 ## Usage
 
 ### Setup
@@ -42,12 +140,17 @@ To configure your app, all required settings must be provided as environment var
 - **RACK_ENV**: This is the environment for the application.
 - **WEB_CONCURRENCY**: This is the number of worker processes that should be used.
 - **MAX_THREADS**: This is the number of threads that should be used.
-- **DB_ADAPTER**: This is the DB you are using it can be the following: `mysql, psql, sqlite3`. The default is sqlite3 if this is changed make sure to update the gemfile 
+- **DB_ADAPTER**: This is the DB you are using it can be the following: `mysql, psql, sqlite3`. The default is sqlite3 if this is changed make sure to update the gemfile.
 - **DB_NAME**: This is your application DB name.
 - **DB_USERNAME**: This is the username for your application DB.
 - **DB_PASSWORD**: This is the password for your application DB.
 - **DB_HOST**: This is the host for your application DB.
 - **DB_PORT**: This is the port for your application DB.
+- **CACHE_ADAPTER**: This is the cache adapter you are using it can be the following: `memory, redis`. The default is memory.
+- **CACHE_HOST**: This is the host for your cache server. Default is localhost.
+- **CACHE_PORT**: This is the port for your cache server. Default is 6379.
+- **CACHE_PASSWORD**: This is the password for your cache server. Default is empty (no password).
+- **CACHE_EXPIRATION**: This is the expiration time for cached items in seconds. Default is 3600 seconds (1 hour).
 
 ### Creating Controllers
 
