@@ -1,13 +1,23 @@
 require_relative 'controllers/controller'
-require_relative 'controllers/demo_controller'
+require_relative 'controllers/app_controller'
 require_relative 'controllers/error_controller'
 
 module Routes
   def self.registered(app)
 
-    # GET: demo
+    ###
+    ### This is the main file where your routes are defined!
+    ### To create a controller see README.md once created make sure you define the route and methods here!
+    ###
+
+    # GET: /
+    app.get '/' do
+      AppController.new.index
+    end
+
+    # GET: /demo
     app.get '/demo' do
-      DemoController.new.demo
+      AppController.new.index
     end
 
     # ERROR HANDLING; DO NOT REMOVE IF YOU DON'T KNOW WHAT YOU'RE DOING
