@@ -1,4 +1,4 @@
-class ErrorController < Controller
+class ErrorController < BaseController
   def not_found
     json({ error: "Not Found", code: 404 }, 404)
   end

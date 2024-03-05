@@ -15,7 +15,7 @@ def generate_controller(name)
       class #{name.capitalize}Controller < BaseController
         # Hooray! Your controller has been created. To get started, you can:
         #  - Define controller actions to handle different routes and requests.
-        #  - Use helper methods provided in the base controller (see web/controller/controller.rb).
+        #  - Use helper methods provided in the base controller (see web/controller/base_controller.rb).
         #  - Utilize built-in Sinatra helpers, or register your own custom helpers (see Sinatra documentation).
         #
         # Here are some tips:

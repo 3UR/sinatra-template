@@ -1,4 +1,4 @@
-require_relative 'controllers/controller'
+require_relative 'controllers/base_controller'
 require_relative 'controllers/app_controller'
 require_relative 'controllers/error_controller'
 

@@ -1,7 +1,11 @@
 require 'sinatra'
 
 require_relative 'config/config'
+require_relative 'web/middleware/host_filter'
 require_relative 'web/routes'
+
+# apply middleware
+use HostFilter
 
 # register routes
 register Routes
