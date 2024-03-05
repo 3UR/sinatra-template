@@ -27,8 +27,8 @@ This template was made for building micro APIs using [Sinatra](https://github.co
 > Production **ONLY WORKS ON LINUX**
 1. Clone this repository.
 2. Install dependencies by running `cd src && bundle install`.
-3. Install the unicorn gem by running `gem install unicorn`.
-4. Run the application using `unicorn -c config/unicorn.rb`.
+3. Install the puma gem by running `gem install puma`.
+4. Run the application using `puma -c config/puma.rb`.
 
 > **TIP:** This also comes with a `.Dockerfile` so you can dockerize your app!
 
@@ -41,6 +41,7 @@ To configure your app, all required settings must be provided as environment var
 - **APP_PORT**: This is the port for the application.
 - **RACK_ENV**: This is the environment for the application.
 - **WEB_CONCURRENCY**: This is the number of worker processes that should be used.
+- **MAX_THREADS**: This is the number of threads that should be used.
 
 ## Contributing
 If you have any suggestions, features, bug fixes or enhancements, feel free to open an issue or create a pull request.

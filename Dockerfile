@@ -8,9 +8,9 @@ RUN apk --no-cache add build-base tzdata
 # Install gems
 COPY src/Gemfile ./
 RUN bundle install
-RUN gem install unicorn
+RUN gem install puma
 
 # Copy application
 COPY src .
 
-CMD ["unicorn", "-c", "config/unicorn.rb"]
+CMD ["puma", "-C", "config/puma.rb"]
