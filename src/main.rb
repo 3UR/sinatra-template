@@ -1,7 +1,6 @@
 require 'sinatra'
-require 'dotenv/load'
 
-require_relative 'app/config'
+require_relative 'config/config'
 require_relative 'web/routes'
 
 # register routes
