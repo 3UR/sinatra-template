@@ -40,6 +40,6 @@ class AppController < BaseController
   private
 
   def generate_data_to_cache
-    "This is cached data generated at #{Time.now.utc} UTC"
+    "This is cached data generated at #{Time.now.utc}"
   end
 end
