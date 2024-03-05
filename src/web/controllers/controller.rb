@@ -1,4 +1,7 @@
-# base controller inherited by other controllers
+###
+### WARNING: DO NOT DELETE THIS IF YOU DO NOT KNOW WHAT YOU ARE DOING IT IS THE BASE FOR ALL CONTROLLERS !!!
+###
+
 class Controller
   def response(content, status = 200, headers = {})
     [status, headers, content]

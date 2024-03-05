@@ -1,10 +1,6 @@
-require_relative 'controllers/base/controller'
+require_relative 'controllers/controller'
 require_relative 'controllers/demo_controller'
 require_relative 'controllers/error_controller'
-
-# when adding new routes make sure to require the controller as seen above!
-# all new controllers SHOULD inherit the base controller as it ideally will have helpers etc but it is not required
-# TODO: some kind of way to automate controller creation? "ruby xxx.rb create_controller {name}"
 
 module Routes
   def self.registered(app)
