@@ -102,12 +102,12 @@ end
 namespace :db do
   desc 'Migrate the database'
   task :migrate do
-    ActiveRecord::MigrationContext.new(DB_MIGRATIONS_PATH).migrate
+    ActiveRecord::MigrationContext.new(Config::Database::MIGRATIONS_PATH).migrate
   end
 
   desc 'Rollback the last migration'
   task :rollback do
-    ActiveRecord::MigrationContext.new(DB_MIGRATIONS_PATH).rollback
+    ActiveRecord::MigrationContext.new(Config::Database::MIGRATIONS_PATH).rollback
   end
 
   desc 'Reset the database (rollback and migrate)'
@@ -115,7 +115,7 @@ namespace :db do
 
   desc 'Show pending migrations'
   task :pending do
-    pending_migrations = ActiveRecord::Migrator.new(:up, DB_MIGRATIONS_PATH).pending_migrations
+    pending_migrations = ActiveRecord::Migrator.new(:up, Config::Database::MIGRATIONS_PATH).pending_migrations
 
     if pending_migrations.any?
       puts "Pending migrations:"

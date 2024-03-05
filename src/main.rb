@@ -6,10 +6,10 @@ require_relative 'web/middleware/host_filter'
 require_relative 'web/routes'
 
 # sinatra config
-set :host, APP_HOST
-set :port, APP_PORT
-set :environment, RACK_ENV
-set :debug, APP_DEBUG
+set :host, Config::General::APP_HOST
+set :port, Config::General::APP_PORT
+set :environment, Config::General::RACK_ENV
+set :debug, Config::General::APP_DEBUG
 
 # apply middleware
 use HostFilter
