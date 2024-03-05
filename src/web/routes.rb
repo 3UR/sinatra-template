@@ -15,9 +15,10 @@ module Routes
       AppController.new.index
     end
 
-    # GET: /demo
-    app.get '/demo' do
-      AppController.new.demo
+    # GET: /params-demo
+    app.get '/params-demo' do
+      controller = AppController.new
+      controller.demo(params)
     end
 
     # GET: /cache-demo
@@ -26,8 +27,8 @@ module Routes
     end
 
     # ERROR HANDLING; DO NOT REMOVE IF YOU DON'T KNOW WHAT YOU'RE DOING
-    app.error 400 do ErrorController.new.bad_request end
-    app.error 403 do ErrorController.new.forbidden end
+    #app.error 400 do ErrorController.new.bad_request end
+    #app.error 403 do ErrorController.new.forbidden end
     app.not_found do ErrorController.new.not_found end # TODO: read more into sinatra docs this could end up being changed to .error 404
     app.error 500 do ErrorController.new.internal_server_error end
     app.error do ErrorController.new.internal_server_error end # unhandled error, we will just 500

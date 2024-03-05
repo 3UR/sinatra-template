@@ -15,9 +15,11 @@ class AppController < BaseController
   end
 
   # This is moved from `demo_controller` because I want the Sinatra template to have an example controller with the documentation from generate_controller
-  def demo
+  def demo(params)
+    word = params[:word]
+
     # taken from the sinatra lib documentation and changed up to work with my template
-    json({ message: "I'm a teapot!" }, 418, { "Allow" => "BREW, POST, GET, PROPFIND, WHEN", "Refresh" => "Refresh: 20; https://ietf.org/rfc/rfc2324.txt" })
+    json({ message: "I'm a teapot!", word: word }, 418, { "Allow" => "BREW, POST, GET, PROPFIND, WHEN", "Refresh" => "Refresh: 20; https://ietf.org/rfc/rfc2324.txt" })
   end
 
   # Action for framework user to try out the public cacing API
