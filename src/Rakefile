@@ -17,7 +17,7 @@ namespace :make do
 
     # create the controller :)
     File.open(controller_filename, 'w') do |file|
-      file.puts <<~CONTROLLER      
+      file.puts <<~RUBY      
         class #{name.capitalize}Controller < BaseController
           # Hooray! Your controller has been created. To get started, you can:
           #  - Define controller actions to handle different routes and requests.
@@ -34,7 +34,7 @@ namespace :make do
             json({ message: "Hello World!" })
           end
         end
-      CONTROLLER
+      RUBY
     end
 
     puts "Controller #{name.capitalize}Controller created successfully! (## IF YOU DO NOT LIKE THE NAME CAPITALIZATION FOR THE CONTROLLER NAME FEEL FREE TO CHANGE IT ##)"
@@ -47,7 +47,7 @@ namespace :make do
 
     # create the migration :)
     File.open(migration_filename, 'w') do |file|
-      file.puts <<~MIGRATION      
+      file.puts <<~RUBY      
         class #{name.capitalize} < ActiveRecord::Migration[7.1]
           # Hooray! Your migration has been created. To get started you can:
           #  - Check out https://guides.rubyonrails.org/active_record_migrations.html for more info
@@ -64,7 +64,7 @@ namespace :make do
             drop_table :#{name.pluralize}
           end
         end
-      MIGRATION
+      RUBY
     end
 
     puts "Migration #{name} created successfully!"
@@ -72,7 +72,30 @@ namespace :make do
 
   desc 'Make a model'
   task :model, [:name] do |_task, args|
-    puts "!! NOT IMPLEMENTED !!"
+    name = args[:name]
+    model_filename = File.join(File.dirname(__FILE__), "web/models/#{name.capitalize}.rb")
+
+    if File.exist?(model_filename)
+      puts "Model #{name.capitalize} already exists!"
+      next
+    end
+
+    # create the model :)
+    File.open(model_filename, 'w') do |file|
+      file.puts <<~RUBY      
+        class #{name.capitalize} < ActiveRecord::Base
+          # Hooray! Your model has been created. To get started you can:
+          #  - Check out https://guides.rubyonrails.org/active_record_basics.html#creating-active-record-models for more info
+          #  - Add any validations or custom methods here
+          #  - Reference this model in your controller to use it
+        end
+      RUBY
+    end
+
+    puts "Migration #{name} created successfully!"
+
+    # make the model with the same name
+    Rake::Task['make:model'].invoke(args[:name])
   end
 end
 

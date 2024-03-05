@@ -61,6 +61,8 @@ Creating controllers is really easy based on how you've structured the project. 
 
 Creating migrations is really easy based on how you've structured the project. Here's what you need to do:
 
+**NOTE:** THIS ALSO CREATES A MODEL WITH THE SAME NAME SO NO MANUAL MODEL CREATION IS NEEDED
+
 1. Navigate to the root directory containing the `Rakefile`.
 2. Run the following command in your terminal: `rake make:migration[name]`.
 3. You'll now find a newly created migration along with documentation inside `database/migrations/<date>_<migration_name>.rb`.
@@ -72,6 +74,10 @@ Other CLI commands can be listd pretty easily. Here's what you need to do:
 1. Navigate to the root directory containing the `Rakefile`.
 2. Run the following command in your terminal: `rake --tasks`.
 3. You'll now see a list of CLI commands.
+
+### Using Models
+
+Make sure you have configured your database first and created all migrations after this you can do `require_relative '../models/model_name'` from your controller.
 
 ## Contributing
 If you have any suggestions, features, bug fixes or enhancements, feel free to open an issue or create a pull request.
