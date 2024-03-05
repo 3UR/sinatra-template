@@ -68,6 +68,9 @@ namespace :make do
     end
 
     puts "Migration #{name} created successfully!"
+
+    # make the model with the same name
+    Rake::Task['make:model'].invoke(args[:name])
   end
 
   desc 'Make a model'
@@ -92,10 +95,7 @@ namespace :make do
       RUBY
     end
 
-    puts "Migration #{name} created successfully!"
-
-    # make the model with the same name
-    Rake::Task['make:model'].invoke(args[:name])
+    puts "Model #{name} created successfully!"
   end
 end
 
