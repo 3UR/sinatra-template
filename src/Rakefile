@@ -1,0 +1,106 @@
+require 'active_support/inflector'
+require 'active_record'
+
+require_relative 'config/config'
+
+namespace :make do
+  desc 'Make a controller'
+  task :controller, [:name] do |_task, args|
+    name = args[:name]
+    controller_filename = File.join(File.dirname(__FILE__), "web/controllers/#{name.downcase}_controller.rb")
+
+    # check if the controller already exists; if it does lets not proceed as it can cause code loss
+    if File.exist?(controller_filename)
+      puts "Controller #{name.capitalize}Controller already exists!"
+      next
+    end
+
+    # create the controller :)
+    File.open(controller_filename, 'w') do |file|
+      file.puts <<~CONTROLLER      
+        class #{name.capitalize}Controller < BaseController
+          # Hooray! Your controller has been created. To get started, you can:
+          #  - Define controller actions to handle different routes and requests.
+          #  - Use helper methods provided in the base controller (see web/controller/base_controller.rb).
+          #  - Utilize built-in Sinatra helpers, or register your own custom helpers (see Sinatra documentation).
+          #
+          # Here are some tips:
+          #  - Make sure that your controllers are mapped to a route (see web/routes.rb).
+          #  - Make sure that you handle errors within controller actions correctly, as the global handler may not catch all errors and or your app may crash/degrade.
+          #  - Have fun with this Template/Library whatever you consider it!
+        
+          # Here is an example action to get you going:
+          def index
+            json({ message: "Hello World!" })
+          end
+        end
+      CONTROLLER
+    end
+
+    puts "Controller #{name.capitalize}Controller created successfully! (## IF YOU DO NOT LIKE THE NAME CAPITALIZATION FOR THE CONTROLLER NAME FEEL FREE TO CHANGE IT ##)"
+  end
+
+  desc 'Make a migration'
+  task :migration, [:name] do |_task, args|
+    name = args[:name]
+    migration_filename = File.join(File.dirname(__FILE__), "database/migrations/#{Time.now.utc.strftime("%Y%m%d%H%M%S")}_#{name.downcase}.rb")
+
+    # create the migration :)
+    File.open(migration_filename, 'w') do |file|
+      file.puts <<~MIGRATION      
+        class #{name.capitalize} < ActiveRecord::Migration[7.1]
+          # Hooray! Your migration has been created. To get started you can:
+          #  - Check out https://guides.rubyonrails.org/active_record_migrations.html for more info
+          def up
+            create_table :#{name.pluralize} do |t|
+              t.string :name
+              t.TEXT :description
+            
+              t.timestamps
+            end
+          end
+
+          def down
+            drop_table :#{name.pluralize}
+          end
+        end
+      MIGRATION
+    end
+
+    puts "Migration #{name} created successfully!"
+  end
+
+  desc 'Make a model'
+  task :model, [:name] do |_task, args|
+    puts "!! NOT IMPLEMENTED !!"
+  end
+end
+
+namespace :db do
+  desc 'Migrate the database'
+  task :migrate do
+    ActiveRecord::MigrationContext.new(DB_MIGRATIONS_PATH).migrate
+  end
+
+  desc 'Rollback the last migration'
+  task :rollback do
+    ActiveRecord::MigrationContext.new(DB_MIGRATIONS_PATH).rollback
+  end
+
+  desc 'Reset the database (rollback and migrate)'
+  task :reset => [:rollback, :migrate]
+
+  desc 'Show pending migrations'
+  task :pending do
+    pending_migrations = ActiveRecord::Migrator.new(:up, DB_MIGRATIONS_PATH).pending_migrations
+
+    if pending_migrations.any?
+      puts "Pending migrations:"
+      pending_migrations.each do |migration|
+        puts "  #{migration.version} - #{migration.name}"
+      end
+    else
+      puts "No pending migrations"
+    end
+  end
+end

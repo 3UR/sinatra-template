@@ -42,14 +42,36 @@ To configure your app, all required settings must be provided as environment var
 - **RACK_ENV**: This is the environment for the application.
 - **WEB_CONCURRENCY**: This is the number of worker processes that should be used.
 - **MAX_THREADS**: This is the number of threads that should be used.
+- **DB_ADAPTER**: This is the DB you are using it can be the following: `mysql, psql, sqlite3`. The default is sqlite3 if this is changed make sure to update the gemfile 
+- **DB_NAME**: This is your application DB name.
+- **DB_USERNAME**: This is the username for your application DB.
+- **DB_PASSWORD**: This is the password for your application DB.
+- **DB_HOST**: This is the host for your application DB.
+- **DB_PORT**: This is the port for your application DB.
 
 ### Creating Controllers
 
 Creating controllers is really easy based on how you've structured the project. Here's what you need to do:
 
-1. Navigate to the root directory.
-2. Run the following command in your terminal: `ruby src/bin/generate_controller.rb <controller_name>`.
+1. Navigate to the root directory containing the `Rakefile`.
+2. Run the following command in your terminal: `rake make:controller[name]`.
 3. You'll now find a newly created controller along with documentation inside `web/controllers/<controller_name>.rb`.
+
+### Creating Migrations
+
+Creating migrations is really easy based on how you've structured the project. Here's what you need to do:
+
+1. Navigate to the root directory containing the `Rakefile`.
+2. Run the following command in your terminal: `rake make:migration[name]`.
+3. You'll now find a newly created migration along with documentation inside `database/migrations/<date>_<migration_name>.rb`.
+
+### Migrating/Other CLI Commands
+
+Other CLI commands can be listd pretty easily. Here's what you need to do:
+
+1. Navigate to the root directory containing the `Rakefile`.
+2. Run the following command in your terminal: `rake --tasks`.
+3. You'll now see a list of CLI commands.
 
 ## Contributing
 If you have any suggestions, features, bug fixes or enhancements, feel free to open an issue or create a pull request.
