@@ -1,0 +1,14 @@
+# please add general patterns to your global ignore list
+# see https://github.com/github/gitignore#readme
+.DS_STORE
+*.swp
+*.rbc
+/pkg
+*.lock
+/coverage
+.yardoc
+/doc
+.bundle
+vendor
+*.gem
+.env
