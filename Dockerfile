@@ -3,7 +3,7 @@ FROM ruby:3.3.0-alpine
 WORKDIR /sinatra-app
 
 # Install dependencies
-RUN apk --no-cache add build-base tzdata libmysqlclient-dev
+RUN apk --no-cache add build-base tzdata mariadb-dev
 
 # Install gems
 COPY src/Gemfile ./
