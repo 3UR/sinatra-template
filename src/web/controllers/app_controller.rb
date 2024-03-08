@@ -44,6 +44,16 @@ class AppController < BaseController
     json({ data: data })
   end
 
+  def rate_limiter_demo
+    # 5 requests within 20 seconds
+    key = "testing_rate_limiter:#{visitor_ip}"
+    limit = 5
+    interval = 20
+    return rate_limit(key, limit, interval) if rate_limit(key, limit, interval)
+  
+    return json({ "message" => key })
+  end
+
   private
 
   def generate_data_to_cache
