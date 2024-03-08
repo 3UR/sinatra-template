@@ -75,11 +75,15 @@ when 'redis'
   require 'redis-namespace'
   require 'active_support/cache/redis_cache_store'
   
-  redis_options = { host: Config::Caching::HOST, port: Config::Caching::PORT }
+  redis_options = { url: "redis://#{Config::Caching::HOST}:#{Config::Caching::PORT}" }
   redis_options[:password] = Config::Caching::PASSWORD if Config::Caching::PASSWORD
   
-  redis = Redis.new(redis_options)
-  CACHE_STORE = ActiveSupport::Cache::RedisCacheStore.new(redis, expires_in: Config::Caching::EXPIRATION)
+  CACHE_STORE = ActiveSupport::Cache::RedisCacheStore.new(
+    compress: true,
+    compress_threshold: 1.kilobyte,
+    expires_in: Config::Caching::EXPIRATION,
+    **redis_options
+  )
 else
   raise "Invalid cache adapter specified: #{CACHE_ADAPTER}; Supported: memory, redis"
 end
