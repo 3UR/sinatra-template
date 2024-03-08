@@ -1,12 +1,9 @@
-class ErrorController < BaseController  
-  def bad_request
-    json({ error: "Bad Request", code: 400 }, 400)
+class ErrorController < BaseController
+  #keepme
+  def initialize(request)
+    super(request)
   end
-
-  def forbidden
-    json({ error: "Forbidden", code: 403 }, 403)
-  end
-
+  
   def not_found
     json({ error: "Not Found", code: 404 }, 404)
   end

@@ -1,0 +1,27 @@
+version: '3'
+
+services:
+  sinatra-api:
+    build: .
+    container_name: sinatra-api
+    environment:
+      - APP_HOST=api.project.local
+      - APP_PORT=1234
+      - RACK_ENV=development
+      - WEB_CONCURRENCY=15
+      - MAX_THREADS=10
+      - DB_ADAPTER=sqlite
+      - APP_CORS_ORIGIN=https://project.local
+      - CACHE_ADAPTER=redis # password and stuff isnt needed but in production you shouldnt be using this config, this is just for a dev/experiment the framework setup      
+    ports:
+      - "1234:1234"
+    restart: unless-stopped
+    depends_on:
+      - redis
+      
+  redis:
+    image: redis:alpine
+    container_name: redis
+    expose:
+      - "6379:6379"
+    restart: unless-stopped

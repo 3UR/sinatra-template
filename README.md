@@ -120,7 +120,7 @@ CACHE_STORE.delete('my_key')
 > Development
 1. Clone this repository.
 2. Install dependencies by running `cd src && bundle install`.
-3. Run the application using `ruby main.rb`.
+3. Run the application using `cd scripts && bash ./run_dev.sh` or on Windows `cd scripts && run_dev.bat`.
 
 > Production **ONLY WORKS ON LINUX**
 1. Clone this repository.
@@ -137,6 +137,7 @@ To configure your app, all required settings must be provided as environment var
 #### All Settings
 - **APP_HOST**: This is the host for the application.
 - **APP_PORT**: This is the port for the application.
+- **APP_CORS_ORIGIN**: This is optional if not provided `*` will be used otherwise specify origin
 - **RACK_ENV**: This is the environment for the application.
 - **WEB_CONCURRENCY**: This is the number of worker processes that should be used.
 - **MAX_THREADS**: This is the number of threads that should be used.

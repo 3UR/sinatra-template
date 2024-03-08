@@ -1,9 +1,10 @@
 class Config
   class General
-    RACK_ENV  = ENV['RACK_ENV'] || 'development'
-    APP_DEBUG = ENV['RACK_ENV'] == 'development'
-    APP_HOST  = ENV['APP_HOST'] || 'localhost'
-    APP_PORT  = ENV['APP_PORT'] || 45870
+    RACK_ENV            = ENV['RACK_ENV'] || 'development'
+    APP_DEBUG           = ENV['RACK_ENV'] == 'development'
+    APP_HOST            = ENV['APP_HOST'] || 'localhost'
+    APP_PORT            = ENV['APP_PORT'] || 45870
+    ALLOWED_CORS_ORIGIN = ENV['APP_CORS_ORIGIN'] || '*'
   end
 
   class Database

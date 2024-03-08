@@ -1,4 +1,9 @@
 class AppController < BaseController
+  #keepme
+  def initialize(request)
+    super(request)
+  end
+
   # Hooray! Your controller has been created. To get started, you can:
   #  - Define controller actions to handle different routes and requests.
   #  - Use helper methods provided in the base controller (see web/controller/base_controller.rb).

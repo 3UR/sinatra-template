@@ -17,21 +17,36 @@ module Routes
 
     # GET: /params-demo
     app.get '/params-demo' do
-      controller = AppController.new
+      controller = AppController.new(request)
       controller.demo(params)
     end
 
     # GET: /cache-demo
     app.get '/cache-demo' do
-      AppController.new.cache_demo
+      controller = AppController.new(request)
+      controller.cache_demo
+    end
+
+    app.get '/rate-limiter-demo' do
+      controller = AppController.new(request)
+      controller.rate_limiter_demo
     end
 
     # ERROR HANDLING; DO NOT REMOVE IF YOU DON'T KNOW WHAT YOU'RE DOING
-    #app.error 400 do ErrorController.new.bad_request end
-    #app.error 403 do ErrorController.new.forbidden end
-    app.not_found do ErrorController.new.not_found end # TODO: read more into sinatra docs this could end up being changed to .error 404
-    app.error 500 do ErrorController.new.internal_server_error end
-    app.error do ErrorController.new.internal_server_error end # unhandled error, we will just 500
+    app.not_found do 
+      error_controller = ErrorController.new(request)
+      error_controller.not_found
+    end
+
+    app.error 500 do 
+      error_controller = ErrorController.new(request)
+      error_controller.internal_server_error
+    end
+
+    app.error do 
+      error_controller = ErrorController.new(request)
+      error_controller.internal_server_error # unhandled error
+    end
     # END ERROR HANDLING
   end
 end

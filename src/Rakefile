@@ -29,6 +29,12 @@ namespace :make do
           #  - Make sure that you handle errors within controller actions correctly, as the global handler may not catch all errors and or your app may crash/degrade.
           #  - Have fun with this Template/Library whatever you consider it!
         
+          #KEEP_ME_HERE
+          def initialize(request)
+            @request = request
+          end
+          #KEEP_ME_HERE
+
           # Here is an example action to get you going:
           def index
             json({ message: "Hello World!" })

@@ -1,9 +1,18 @@
 require 'sinatra'
 require 'active_record'
 
+# configuration
 require_relative 'config/config'
+
+# middleware
 require_relative 'web/middleware/host_filter'
+require_relative 'web/middleware/cors_middleware'
+
+# routes
 require_relative 'web/routes'
+
+# ratelimiter (required here so it can be used globally)
+require_relative 'lib/rate_limiter'
 
 # sinatra config
 set :host, Config::General::APP_HOST
@@ -12,7 +21,10 @@ set :environment, Config::General::RACK_ENV
 set :debug, Config::General::APP_DEBUG
 
 # apply middleware
-use HostFilter
+if not Config::General::APP_DEBUG
+  use HostFilter
+end
+use CorsMiddleware
 
 # register routes
 register Routes
