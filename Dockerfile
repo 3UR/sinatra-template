@@ -8,7 +8,6 @@ RUN apk --no-cache add build-base tzdata mariadb-dev postgresql-dev
 # Install gems
 COPY src/Gemfile ./
 RUN bundle install
-RUN gem install puma
 
 # Copy application
 COPY src .
