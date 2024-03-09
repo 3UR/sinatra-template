@@ -141,7 +141,7 @@ To configure your app, all required settings must be provided as environment var
 - **RACK_ENV**: This is the environment for the application.
 - **WEB_CONCURRENCY**: This is the number of worker processes that should be used.
 - **MAX_THREADS**: This is the number of threads that should be used.
-- **DB_ADAPTER**: This is the DB you are using it can be the following: `mysql, psql, sqlite3`. The default is sqlite3 if this is changed make sure to update the gemfile.
+- **DB_ADAPTER**: This is the DB you are using it can be the following: `mysql, psql, sqlite3`. The default is sqlite3 if this is changed make sure to update the gemfile. **NOTE:** When using a different DB adapter make sure that you uncomment your selected provider in `src/Gemfile`.
 - **DB_NAME**: This is your application DB name.
 - **DB_USERNAME**: This is the username for your application DB.
 - **DB_PASSWORD**: This is the password for your application DB.
