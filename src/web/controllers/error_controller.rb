@@ -1,7 +1,6 @@
 class ErrorController < BaseController
-  #keepme
-  def initialize(request)
-    super(request)
+  def initialize(request, response, params)
+    super(request, response, params)
   end
   
   def not_found

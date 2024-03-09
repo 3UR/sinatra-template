@@ -3,8 +3,10 @@
 ###
 
 class BaseController
-  def initialize(request)
+  def initialize(request, response, params)
     @request = request
+    @response = response
+    @params = params
   end
 
   def response(content, status = 200, headers = {})

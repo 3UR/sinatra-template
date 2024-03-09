@@ -1,7 +1,6 @@
 class AppController < BaseController
-  #keepme
-  def initialize(request)
-    super(request)
+  def initialize(request, response, params)
+    super(request, response, params)
   end
 
   # Hooray! Your controller has been created. To get started, you can:
